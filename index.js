@@ -1,1 +1,3 @@
-ReactDOM.render(<h1>Hello, React 18!</h1>, document.getElementById("root"));
+
+ReactDOM.render(<h1>This is JSX</h1>, document.getElementById("root"));
+
