@@ -1,0 +1,1 @@
+ReactDOM.render(<h1>Hello, React 18!</h1>, document.getElementById("root"));
