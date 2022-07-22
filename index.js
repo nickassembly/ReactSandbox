@@ -5,7 +5,8 @@ function TemporaryName() {
     <h1>React Website</h1>
     <h3>Use React for many reasons</h3>
     <ol>
-      <li>Composable</li>
+      <li>Popular and supported</li>
+      <li>Composible</li>
       <li>Declarative</li>
       <li>Actively Maintained</li>
     </ol>
