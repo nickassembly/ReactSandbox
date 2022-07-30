@@ -1,10 +1,10 @@
 import React from "react";
-import heroImg from "./images/heroImg";
+import contactImg from "./images/katie-zaferes.png";
 
 export default function Contact () {
     return (
        <div className="contact-card">
-         <img src={heroImg}  className="hero--photo" />
+         <img src={contactImg}  className="hero--photo" />
          <h3>Mr. Whiskerson</h3>
          <div className="info-group">
             <p>(212) 555-1234</p>
