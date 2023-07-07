@@ -1,9 +1,6 @@
 const rootNode = document.getElementById('app');
-
 const root = ReactDOM.createRoot(rootNode);
 root.render(React.createElement(App));
-
-console.log(React);
 
 function App() {
     return (
@@ -15,5 +12,4 @@ function App() {
     );
 }
 
-console.log(App());
 
