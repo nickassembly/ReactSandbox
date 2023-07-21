@@ -14,7 +14,7 @@ function App() {
             </section>
         </>
     );
-}
+}//
 
 function Counter({ name }) {
     return (
