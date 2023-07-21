@@ -1,7 +1,8 @@
 const rootNode = document.getElementById('app');
 const root = ReactDOM.createRoot(rootNode);
 let counterName = "One";
-root.render(React.createElement(App));
+root.render(<App />);
+console.dir(rootNode);
 
 function App() {
     const counterOne = <Counter name={counterName} />;
@@ -39,7 +40,7 @@ function Counter2({ name }) {
 function rerender() {
     console.log("Renender...");
     counterName = "Two";
-    root.render(React.createElement(App));
+    root.render(<App />);
 }
 
 // test
