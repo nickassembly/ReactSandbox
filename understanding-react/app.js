@@ -1,4 +1,13 @@
 const rootNode = document.getElementById('app');
+
+rootNode.addEventListener("click", function (event) {
+    if (event.target.tagName === "BUTTON") {
+        console.log("Clicked button");
+    } else {
+        console.log("Clicked something else");
+    }
+});
+
 const root = ReactDOM.createRoot(rootNode);
 let counterName = "One";
 root.render(<App />);
@@ -18,11 +27,17 @@ function App() {
 }//
 
 function Counter({ name }) {
+
+    const clickHandler = (event) => {
+        console.log("React handled click");
+        console.log(event);
+    }
+
     return (
         <article>
             <h2> Counter {name}</h2>
             <p> You clicked 1 times </p>
-            <button className="button">Click Me</button>
+            <button className="button" onClick={clickHandler}>Click Me</button>
         </article>
     );
 }
@@ -42,6 +57,8 @@ function rerender() {
     counterName = "Two";
     root.render(<App />);
 }
+
+
 
 
 
