@@ -1,13 +1,5 @@
 const rootNode = document.getElementById('app');
 
-rootNode.addEventListener("click", function (event) {
-    if (event.target.tagName === "BUTTON") {
-        console.log("Clicked button");
-    } else {
-        console.log("Clicked something else");
-    }
-});
-
 const root = ReactDOM.createRoot(rootNode);
 let counterName = "One";
 root.render(<App />);
@@ -33,11 +25,25 @@ function Counter({ name }) {
         console.log(event);
     }
 
+    const parentClickHandler = (event) => {
+        console.log("Parent was clicked too");
+    }
+
+    const linkClickHandler = (event) => {
+        event.preventDefault();
+        console.log("Going to site");
+        event.stopPropagation();
+    }
+
     return (
-        <article>
+        <article onClick={parentClickHandler}>
             <h2> Counter {name}</h2>
             <p> You clicked 1 times </p>
             <button className="button" onClick={clickHandler}>Click Me</button>
+            <p>
+                <a href="http://understandingreact.com"
+                    target="_blank" onClick={linkClickHandler}>Understanding React</a>
+            </p>
         </article>
     );
 }

@@ -11064,12 +11064,9 @@
         setTextContent(domElement, '');
     }
     function commitTextUpdate(textInstance, oldText, newText) {
-        console.log(`Updating text ${newText}`);
         textInstance.nodeValue = newText;
     }
     function appendChild(parentInstance, child) {
-        console.log(`Appending child...`);
-        console.log(child);
         parentInstance.appendChild(child);
     }
     function appendChildToContainer(container, child) {
@@ -11077,15 +11074,9 @@
 
         if (container.nodeType === COMMENT_NODE) {
             parentNode = container.parentNode;
-            console.log(`Inserting child in container...`);
-            console.log(child);
             parentNode.insertBefore(child, container);
         } else {
             parentNode = container;
-            console.log(`Appending child to the container...`);
-            console.log(child);
-            console.log("...the container is...");
-            console.log(parentNode);
             parentNode.appendChild(child);
         } // This container might be used for a portal.
         // If something inside a portal is clicked, that click should bubble
@@ -26576,7 +26567,6 @@
         var current = unitOfWork.alternate;
         setCurrentFiber(unitOfWork);
         var next;
-        console.log("Performing work...");
 
         if ((unitOfWork.mode & ProfileMode) !== NoMode) {
             startProfilerTimer(unitOfWork);
@@ -26603,8 +26593,6 @@
         // Attempt to complete the current unit of work, then move to the next
         // sibling. If there are no more siblings, return to the parent fiber.
         var completedWork = unitOfWork;
-        console.log("Completing work...");
-        console.log(unitOfWork);
 
         do {
             // The current, flushed, state of this fiber is the alternate. Ideally
@@ -27449,7 +27437,6 @@
             // error See ReactErrorUtils for more information.
             // Before entering the begin phase, copy the work-in-progress onto a dummy
             // fiber. If beginWork throws, we'll use this to reset the state.
-            console.log("Beginning work...");
             var originalWorkInProgressCopy = assignFiberPropertiesInDEV(dummyFiber, unitOfWork);
 
             try {
