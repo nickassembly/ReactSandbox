@@ -1,5 +1,7 @@
 const rootNode = document.getElementById('app');
 
+// Hooks -- JS objects attached to (other JS objects) nodes of the fiber tree
+
 const root = ReactDOM.createRoot(rootNode);
 let counterName = "One";
 root.render(<App />);
