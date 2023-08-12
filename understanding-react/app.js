@@ -8,63 +8,32 @@ root.render(<App />);
 console.dir(rootNode);
 
 function App() {
-    const counterOne = <Counter name={counterName} />;
-    const counterTwo = <Counter2 name={counterName} />;
     return (
         <>
             <h1> Counters </h1>
             <section>
-                {counterName === "One" ? counterOne : counterTwo}
+                <Counter name="One" />
             </section>
         </>
     );
 }//
 
-function Counter({ name }) {
+function Counter(props) {
 
-    const clickHandler = (event) => {
-        console.log("React handled click");
-        console.log(event);
-    }
+    // use reducer part 2
+    const [state, dispatch] = React.useReducer(() => {
 
-    const parentClickHandler = (event) => {
-        console.log("Parent was clicked too");
-    }
+    }, { clicks: 0 });
 
-    const linkClickHandler = (event) => {
-        event.preventDefault();
-        console.log("Going to site");
-        event.stopPropagation();
-    }
-
-    return (
-        <article onClick={parentClickHandler}>
-            <h2> Counter {name}</h2>
-            <p> You clicked 1 times </p>
-            <button className="button" onClick={clickHandler}>Click Me</button>
-            <p>
-                <a href="http://understandingreact.com"
-                    target="_blank" onClick={linkClickHandler}>Understanding React</a>
-            </p>
-        </article>
-    );
-}
-
-function Counter2({ name }) {
     return (
         <article>
-            <h2> Counter {name}</h2>
-            <p> Times clicked: 1 </p>
+            <h2> Counter {props.name}</h2>
+            <p> You clicked {state.clicks} times </p>
             <button className="button">Click Me</button>
         </article>
     );
 }
 
-function rerender() {
-    console.log("Renender...");
-    counterName = "Two";
-    root.render(<App />);
-}
 
 
 
