@@ -13,6 +13,7 @@ function App() {
             <h1> Counters </h1>
             <section>
                 <Counter name="One" />
+                <Counter name="Two" />
             </section>
         </>
     );
@@ -20,16 +21,17 @@ function App() {
 
 function Counter(props) {
 
-    // use reducer part 2
-    const [state, dispatch] = React.useReducer(() => {
-
-    }, { clicks: 0 });
+    const [numOfClicks, setNumOfClicks] = React.useState(0);
+    const [myName, setMyName] = React.useState("Keller");
+    const [state, dispatch] = React.useReducer(() => { }, "Car");
 
     return (
         <article>
             <h2> Counter {props.name}</h2>
-            <p> You clicked {state.clicks} times </p>
-            <button className="button">Click Me</button>
+            <p> You clicked {numOfClicks} times </p>
+            <button className="button" onClick={() => {
+                setNumOfClicks(numOfClicks + 1);
+            }}>Click Me</button>
         </article>
     );
 }

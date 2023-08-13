@@ -26845,7 +26845,7 @@
 
 
             requestPaint();
-            console.log("Execution Context " + executionContext);
+            // console.log("Execution Context " + executionContext);
             executionContext = prevExecutionContext; // Reset the priority to the previous non-sync value.
 
             setCurrentUpdatePriority(previousPriority);
@@ -28248,7 +28248,7 @@
             }
         }
 
-        console.log(workInProgress);
+        // console.log(workInProgress);
         return workInProgress;
     } // Used to reuse a Fiber for a second pass.
 
