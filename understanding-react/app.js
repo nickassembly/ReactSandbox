@@ -17,7 +17,7 @@ function App() {
             </section>
         </>
     );
-}//
+}
 
 function Counter(props) {
 
