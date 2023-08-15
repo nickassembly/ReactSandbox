@@ -19,19 +19,30 @@ function App() {
     );
 }
 
+// shallow equality
 function Counter(props) {
 
     const [numOfClicks, setNumOfClicks] = React.useState(0);
-    const [myName, setMyName] = React.useState("Keller");
-    const [state, dispatch] = React.useReducer(() => { }, "Car");
+
+    function handleClickWrong() {
+        setNumOfClicks(numOfClicks + 1)
+        setNumOfClicks(numOfClicks + 1)
+        setNumOfClicks(numOfClicks + 1)
+    }
+
+    function handleClick() {
+        setNumOfClicks(n => n + 1)
+        setNumOfClicks(n => n + 1)
+        setNumOfClicks(n => n + 1)
+
+    }
+
 
     return (
         <article>
             <h2> Counter {props.name}</h2>
             <p> You clicked {numOfClicks} times </p>
-            <button className="button" onClick={() => {
-                setNumOfClicks(numOfClicks + 1);
-            }}>Click Me</button>
+            <button className="button" onClick={handleClick}>Click Me</button>
         </article>
     );
 }
