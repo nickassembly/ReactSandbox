@@ -19,19 +19,17 @@ function App() {
     );
 }
 
-// shallow equality
 function Counter(props) {
 
     const [numOfClicks, setNumOfClicks] = React.useState({ total: 0 });
 
-    function handleClickWrong() {
-        numOfClicks.total = numOfClicks.total + 1;
-        setNumOfClicks(numOfClicks);
-    }
+    React.useEffect(() => {
+        console.log("In Use Effect");
+        document.title = `Clicks: ${numOfClicks.total}`
+    }, [numOfClicks.total]);
 
     function handleClick() {
         setNumOfClicks({ ...numOfClicks, total: numOfClicks.total + 1 });
-
     }
 
 
@@ -39,9 +37,7 @@ function Counter(props) {
         <article>
             <h2> Counter {props.name}</h2>
             <p> You clicked {numOfClicks.total} times </p>
-            <p>
-                <button className="button" onClick={handleClickWrong}>Click Me (won't work) </button>
-            </p>
+
             <p>
                 <button className="button" onClick={handleClick}>Click Me</button>
             </p>
