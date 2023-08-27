@@ -8,27 +8,12 @@ root.render(<App />);
 console.dir(rootNode);
 
 function App() {
-    const [swapCounter, setSwapCounter] = React.useState(0);
-
-    function handleClick() {
-        setSwapCounter(!swapCounter);
-    }
-
-    let counterOne = null;
-    if (!swapCounter) {
-        counterOne = <Counter name="One" />
-    }
-
     return (
         <>
-            <h1> Counters </h1>
+            <h1>Counters</h1>
             <section>
-                {counterOne}
-                {swapCounter ? <Counter name="Two" /> : null}
+                <Counter name="One" />
             </section>
-            <p>
-                <button className="button" onClick={handleClick}>Swap Counters</button>
-            </p>
         </>
     );
 }
@@ -40,11 +25,6 @@ function Counter(props) {
     React.useEffect(() => {
         console.log("In Use Effect " + props.name);
         document.title = `Clicks: ${numOfClicks.total}`
-
-        return () => {
-            console.log("Unmounting " + props.name);
-        }
-
     }, [numOfClicks.total]);
 
     function handleClick() {
