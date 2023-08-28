@@ -36,11 +36,9 @@ function Counter(props) {
         <article>
             <h2> Counter {props.name}</h2>
             <p> You clicked {numOfClicks.total} times </p>
-
             <p>
                 <button className="button" onClick={handleClick}>Click Me</button>
             </p>
-
         </article>
     );
 }
