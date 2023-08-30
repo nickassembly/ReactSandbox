@@ -23,8 +23,14 @@ function Counter(props) {
     const [numOfClicks, setNumOfClicks] = React.useState({ total: 0 });
 
     React.useEffect(() => {
-        console.log("In Use Effect " + props.name);
-        document.title = `Clicks: ${numOfClicks.total}`
+        const message = `Number of clicks is: ${numOfClicks.total}`;
+        const id = setInterval(() => {
+            console.log(message);
+        }, 2000);
+
+        return () => {
+            clearInterval(id);
+        }
     }, [numOfClicks.total]);
 
     function handleClick() {
