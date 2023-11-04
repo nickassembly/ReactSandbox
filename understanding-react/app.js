@@ -51,8 +51,6 @@ function Counter(props) {
         incrementCounter();
     }
 
-    // test tte
-
     return (
         <article>
             <h2>Counter {props.name}</h2>
