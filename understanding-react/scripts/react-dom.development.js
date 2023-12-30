@@ -11064,12 +11064,9 @@
         setTextContent(domElement, '');
     }
     function commitTextUpdate(textInstance, oldText, newText) {
-        console.log(`Updating text ${newText}`);
         textInstance.nodeValue = newText;
     }
     function appendChild(parentInstance, child) {
-        console.log(`Appending child...`);
-        console.log(child);
         parentInstance.appendChild(child);
     }
     function appendChildToContainer(container, child) {
@@ -11077,15 +11074,9 @@
 
         if (container.nodeType === COMMENT_NODE) {
             parentNode = container.parentNode;
-            console.log(`Inserting child in container...`);
-            console.log(child);
             parentNode.insertBefore(child, container);
         } else {
             parentNode = container;
-            console.log(`Appending child to the container...`);
-            console.log(child);
-            console.log("...the container is...");
-            console.log(parentNode);
             parentNode.appendChild(child);
         } // This container might be used for a portal.
         // If something inside a portal is clicked, that click should bubble
@@ -26854,6 +26845,7 @@
 
 
             requestPaint();
+            // console.log("Execution Context " + executionContext);
             executionContext = prevExecutionContext; // Reset the priority to the previous non-sync value.
 
             setCurrentUpdatePriority(previousPriority);
@@ -28256,7 +28248,7 @@
             }
         }
 
-        console.log(workInProgress);
+        // console.log(workInProgress);
         return workInProgress;
     } // Used to reuse a Fiber for a second pass.
 
