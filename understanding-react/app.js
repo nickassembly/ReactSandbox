@@ -4,23 +4,23 @@ root.render(<App />);
 
 /* Objects */
 class CounterObj {
-    constructor(id, name, show, total) {
+    constructor(id, name, tab, total) {
         this.id = id;
         this.name = name;
-        this.show = show;
+        this.tab = tab;
         this.total = total;
     }
 }
 /* End Objects */
 
-const CounterContext = React.createContext(3);
-
 function App() {
     const [counterData, setCounterData] = React.useState([
-        new CounterObj(1, 'A', true, 0),
-        new CounterObj(2, 'B', true, 0),
-        new CounterObj(3, 'C', true, 0)
+        new CounterObj(1, 'A', 1, 0),
+        new CounterObj(2, 'B', 2, 0),
+        new CounterObj(3, 'C', 1, 0)
     ]);
+
+    const [visibleTab, setVisibleTab] = React.useState(1);
 
     const increment = (index) => {
         const newData = [...counterData];
@@ -35,17 +35,14 @@ function App() {
         setCounterData(newData);
     }
 
-    const contextData = [counterData, increment, decrement];
-
     return (
         <>
-            <CounterContext.Provider value={contextData}>
-                <h1>Counters</h1>
+            <h1>Counters</h1>
                 <section>
-                    <CounterList />
-                    <CounterTools />
+                    <CounterList counterData={counterData} 
+                    increment={increment} decrement={decrement} />
+                    <CounterTools counterData={counterData} visibleTab={visibleTab} setVisibleTab={setVisibleTab}/>
                 </section>
-            </CounterContext.Provider>
         </>
     );
 }
@@ -61,22 +58,20 @@ function useDocumentTitle(title) {
     }, [title]);
 }
 
-function CounterList() {
-    const [contextData, increment, decrement] = React.useContext(CounterContext);
-    const updateTitle = useDocumentTitle("Clicks: " + contextData.map((counter) => {
+function CounterList({ counterData, increment, decrement }) {
+    const updateTitle = useDocumentTitle("Clicks: " + counterData.map((counter) => {
         return counter.total;
     }).join(', '));
     return (
         <section>
-            { contextData.map((counter, index) => (
-                <Counter counter={counter} index={index} key={counter.id}/>
+            { counterData.map((counter, index) => (
+                <Counter counter={counter} increment={increment} decrement={decrement} index={index} key={counter.id}/>
             ))}
         </section>
     )
 }
 
-function Counter({ counter, index }) {
-    const [contextData, increment, decrement] = React.useContext(CounterContext);
+function Counter({ counter, index, increment, decrement }) {
 
     function handleIncrementClick() {
         increment(index);
@@ -102,32 +97,52 @@ function Counter({ counter, index }) {
     );
 }
 
-function CounterTools() {
+function CounterTools({ counterData, visibleTab, setVisibleTab }) {
     return (
-        <CounterSummary />
+        <CounterSummary counterData={counterData} visibleTab={visibleTab} setVisibleTab={setVisibleTab}/>
     )
 }
 
-function CounterSummary() {
-    const [contextData, increment, decrement] = React.useContext(CounterContext);
-    const sortedData = [...contextData].sort((a, b) => {
-        return b.total - a.total;
-    });
+function CounterSummary({ counterData, visibleTab, setVisibleTab }) {
+    console.log("Rendering CounterSummary");
 
-    const filteredSortedData = sortedData.filter(counter => { return counter.show });
+    const filteredSortedData = React.useMemo(() => {
+        console.log("Filtering data");
+        return counterData.filter(counter => { return counter.tab === visibleTab });
+    }, [visibleTab]);
+
+    const setVisibleTab1 = React.useCallback(() => {
+        setVisibleTab(1);
+    }, []);
+
+    const setVisibleTab2 = React.useCallback(() => {
+        setVisibleTab(2);
+    }, []);
+
     return (
         <section>
-            Summary: { filteredSortedData.map((counter, index) => (
-                <CounterSummaryDetail counter={counter} key={counter.id} />
-            )) }
+            <CounterSummaryHeader setVisibleTab1={setVisibleTab1} setVisibleTab2={setVisibleTab2} />
+                { filteredSortedData.map((counter, index) => (
+                    <CounterSummaryDetail name={counter.name} total={counter.total} key={counter.id} />
+                )) }
         </section>
     )
 }
 
-const CounterSummaryDetail = React.memo(function CounterSummaryDetail ({ counter }) {
+const CounterSummaryHeader = React.memo(function CounterSummaryHeader ({ setVisibleTab1, setVisibleTab2 }) {
+    console.log("Rendering CounterSummaryHeader");
+    return (
+        <header>
+            <a href="#" onClick={setVisibleTab1}>Tab 1</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a href="#" onClick={setVisibleTab2}>Tab 2</a>&nbsp;&nbsp; &nbsp;&nbsp;
+        </header>
+    )
+});
+
+const CounterSummaryDetail = React.memo(function CounterSummaryDetail ({ name, total }) {
     console.log("Rendering CounterSummaryDetail");
     return (
-        <p>{counter.name} ({counter.total})</p>
+        <p>{name} ({total})</p>
     )
 })
 
