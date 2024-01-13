@@ -118,7 +118,7 @@ function Counter({ counter}) {
     const visibleTab = useContext(TabContext);
     const id = useId();
 
-    // having strict mode on exposes that this effect is running twice and not being cleared properly
+    //   having strict mode on exposes that this effect is running twice and not being cleared properly
     useEffect(() => {
         let timerId;
         let seconds = 0;
