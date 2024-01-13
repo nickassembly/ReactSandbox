@@ -11,7 +11,6 @@ import './App.css';
     }
 }
 
-// test commit
 
 const CounterContext = createContext(null);
 const CounterDispatchContext = createContext(null);
